@@ -8,6 +8,13 @@ export const IMG = {
 
   heroPhoto: "/images/hero-drone-varend.jpg",
   heroVideo: "/images/navisol-hero-video-web.mp4",
+  heroBoat1: "/images/hero-eagle-sloop.jpg",
+  heroBoat2: "/images/hero-eagle-force550.jpg",
+
+  logoRituals: "/images/logos/rituals.png",
+  logoCenterParcs: "/images/logos/centerparcs.png",
+  logoStromma: "/images/logos/stromma.jpg",
+  logoEagleBoats: "/images/logos/eagleboats.png",
 
   editorial1: "/images/editorial-01.jpg",
   editorialPanorama2: "/images/editorial-02-panorama.jpg",
@@ -48,6 +55,27 @@ export const IMG = {
   eagle28_3: "/images/eagle-28sg-03.jpg",
   eagle25_1: "/images/eagle-25ts-01.jpg",
 };
+
+/* ------------------------------------------------------------------ */
+/* Clients & partners (shared across languages)                        */
+/* ------------------------------------------------------------------ */
+export interface Client {
+  name: string;
+  logo?: string;
+}
+
+export const CLIENTS: Client[] = [
+  { name: "Rituals", logo: IMG.logoRituals },
+  { name: "Center Parcs", logo: IMG.logoCenterParcs },
+  { name: "Stromma", logo: IMG.logoStromma },
+  { name: "Eagle Boats", logo: IMG.logoEagleBoats },
+  { name: "Eco Boats Amsterdam" },
+  { name: "Veluvia" },
+  { name: "Longfish Leisure" },
+  { name: "HappyWhale" },
+  { name: "Argo Maritime" },
+  { name: "ALNI Technical Bureau" },
+];
 
 export interface EditorialBlock {
   layout: "left" | "right" | "full";
@@ -93,7 +121,16 @@ type Dict = {
     heroLead: string;
     scroll: string;
     heroImage: string;
+    heroImages: string[];
     heroVideo: string;
+    designEyebrow: string;
+    designTitle: string;
+    designBody: string;
+    clientsEyebrow: string;
+    techEyebrow: string;
+    techTitle: string;
+    techItems: { title: string; body: string }[];
+    techStatement: string;
     pillarsEyebrow: string;
     customLabel: string;
     customTitle: string;
@@ -215,7 +252,40 @@ export const content: Record<Lang, Dict> = {
         "Navisol ontwerpt en bouwt aluminium jachten op maat — en is de vaste ontwikkel- en bouwpartner voor botenmerken. Alles onder één dak.",
       scroll: "Ontdek",
       heroImage: IMG.heroPhoto,
+      heroImages: [
+        IMG.heroBoat1,
+        IMG.heroBoat2,
+        IMG.flamme1,
+        IMG.eagle28_1,
+        IMG.editorial1,
+      ],
       heroVideo: IMG.heroVideo,
+      designEyebrow: "In 3D ontworpen",
+      designTitle: "Elk jacht begint als ontwerp",
+      designBody:
+        "Voordat er ook maar één plaat aluminium wordt gesneden, komt elk jacht tot leven in 3D. Zo klopt elke lijn — en weet u precies wat u krijgt — nog voordat de bouw begint.",
+      clientsEyebrow: "Vertrouwd door toonaangevende organisaties",
+      techEyebrow: "Onder de huid",
+      techTitle: "Techniek die klopt. Bouw die blijft.",
+      techItems: [
+        {
+          title: "Aluminium cascobouw",
+          body: "Licht, sterk, goed repareerbaar en uitstekend geschikt voor maatwerk en intensief, dagelijks gebruik.",
+        },
+        {
+          title: "Elektrisch & hybride",
+          body: "Aandrijving, accupakketten, laden, energiemanagement en volledige systeemintegratie.",
+        },
+        {
+          title: "Elektra",
+          body: "Navigatie, communicatie, verlichting, pompen, verwarming en monitoring aan boord.",
+        },
+        {
+          title: "Certificering",
+          body: "ES-TRIN, CE, technische documentatie en afstemming met keuringspartijen.",
+        },
+      ],
+      techStatement: "Niet alleen technisch mogelijk, maar ook dagelijks betrouwbaar.",
       pillarsEyebrow: "Twee manieren om samen te werken",
       customLabel: "Voor eigenaren",
       customTitle: "Jachtbouw op maat",
@@ -295,13 +365,13 @@ export const content: Record<Lang, Dict> = {
       introTitle: "Uw jacht, van A tot Z",
       introBody:
         "Een jacht op maat begint bij uw verhaal en eindigt bij uw eerste vaart. Wij begeleiden elke stap, ontwerpen en bouwen alles zelf, en leveren een schip dat volledig van u is — tot in het kleinste detail van het interieur.",
-      stepsEyebrow: "Het traject",
+      stepsEyebrow: "Van idee naar water",
       steps: [
         {
           index: "01",
-          title: "Ontwerp",
+          title: "Schets & concept",
           body:
-            "Samen bepalen we de lijnen, de indeling en de sfeer. Uw wensen vertalen we naar een 3D-ontwerp dat klopt op het water én in gebruik.",
+            "Vaarprofiel, indeling, uitstraling en eerste richting. Uw wensen vertalen we naar een 3D-ontwerp dat klopt op het water én in gebruik.",
           image: IMG.render1,
           gallery: [IMG.render2, IMG.render3],
         },
@@ -309,45 +379,31 @@ export const content: Record<Lang, Dict> = {
           index: "02",
           title: "Engineering",
           body:
-            "Elk detail wordt doorgerekend en uitgewerkt tot productieklare tekeningen. Vorm, sterkte en gewicht komen hier samen.",
-          image: IMG.render2,
+            "Constructie, systemen, vermogen, energie en detaillering worden doorgerekend en uitgewerkt tot productieklare tekeningen.",
+          image: IMG.editorialWerf6,
         },
         {
           index: "03",
           title: "Cascobouw",
           body:
-            "Het aluminium casco krijgt vorm. Platen worden gesneden, gezet en met de hand gelast tot een sterk, licht en strak geheel.",
+            "Aluminium constructie, laswerk en kwaliteitscontrole. Platen worden gesneden, gezet en met de hand gelast tot een sterk, licht en strak casco.",
           image: IMG.casco2,
           gallery: [IMG.casco1, IMG.casco3, IMG.casco4, IMG.casco5],
         },
         {
           index: "04",
-          title: "Installatie",
+          title: "Afbouw & techniek",
           body:
-            "Motorisatie — conventioneel, hybride of volledig elektrisch — en alle systemen worden vakkundig ingebouwd en aangesloten.",
-          image: IMG.casco5,
-        },
-        {
-          index: "05",
-          title: "Interieur & afbouw",
-          body:
-            "Het interieur wordt op maat getekend en gebouwd. Hout, stoffering en afwerking maken het schip persoonlijk en compleet.",
+            "Interieur, installaties, aandrijving en dekuitrusting — conventioneel, hybride of volledig elektrisch — vakkundig ingebouwd en op maat afgewerkt.",
           image: IMG.salon15,
           gallery: [IMG.salon5, IMG.salon25],
         },
         {
-          index: "06",
-          title: "Proefvaart",
+          index: "05",
+          title: "Testen & opleveren",
           body:
-            "We testen het jacht uitgebreid op het water. Prestaties, systemen en afwerking worden nauwkeurig afgesteld.",
-          image: IMG.editorialPanorama2,
-        },
-        {
-          index: "07",
-          title: "Oplevering",
-          body:
-            "U stapt aan boord van een compleet, varend jacht. Wij blijven betrokken, ook na de oplevering.",
-          image: IMG.veluvia1,
+            "Inbedrijfstelling, proefvaart, dossier en instructie. U stapt aan boord van een compleet, gecertificeerd en varend schip.",
+          image: IMG.editorialPanorama4,
         },
       ],
       ctaTitle: "Uw jacht begint met een gesprek",
@@ -558,7 +614,40 @@ export const content: Record<Lang, Dict> = {
         "Navisol designs and builds bespoke aluminium yachts — and is the trusted development and build partner for boat brands. Everything under one roof.",
       scroll: "Discover",
       heroImage: IMG.heroPhoto,
+      heroImages: [
+        IMG.heroBoat1,
+        IMG.heroBoat2,
+        IMG.flamme1,
+        IMG.eagle28_1,
+        IMG.editorial1,
+      ],
       heroVideo: IMG.heroVideo,
+      designEyebrow: "Designed in 3D",
+      designTitle: "Every yacht begins as a design",
+      designBody:
+        "Before a single sheet of aluminium is cut, every yacht comes to life in 3D. So every line is right — and you know exactly what you'll get — before construction begins.",
+      clientsEyebrow: "Trusted by leading organisations",
+      techEyebrow: "Under the skin",
+      techTitle: "Engineering that's right. Built to last.",
+      techItems: [
+        {
+          title: "Aluminium hull building",
+          body: "Light, strong, easily repairable and ideally suited to custom work and intensive, daily use.",
+        },
+        {
+          title: "Electric & hybrid",
+          body: "Propulsion, battery packs, charging, energy management and full system integration.",
+        },
+        {
+          title: "Electrical systems",
+          body: "Navigation, communication, lighting, pumps, heating and onboard monitoring.",
+        },
+        {
+          title: "Certification",
+          body: "ES-TRIN, CE, technical documentation and coordination with inspection bodies.",
+        },
+      ],
+      techStatement: "Not just technically possible, but dependable every day.",
       pillarsEyebrow: "Two ways to work together",
       customLabel: "For owners",
       customTitle: "Custom Yacht Building",
@@ -638,13 +727,13 @@ export const content: Record<Lang, Dict> = {
       introTitle: "Your yacht, from A to Z",
       introBody:
         "A bespoke yacht begins with your story and ends with your first voyage. We guide every step, design and build everything in-house, and deliver a vessel that is entirely yours — down to the smallest detail of the interior.",
-      stepsEyebrow: "The journey",
+      stepsEyebrow: "From idea to water",
       steps: [
         {
           index: "01",
-          title: "Design",
+          title: "Sketch & concept",
           body:
-            "Together we define the lines, the layout and the atmosphere. Your wishes become a 3D design that works on the water and in use.",
+            "Sailing profile, layout, styling and first direction. Your wishes become a 3D design that works on the water and in use.",
           image: IMG.render1,
           gallery: [IMG.render2, IMG.render3],
         },
@@ -652,45 +741,31 @@ export const content: Record<Lang, Dict> = {
           index: "02",
           title: "Engineering",
           body:
-            "Every detail is calculated and developed into production-ready drawings. Form, strength and weight come together here.",
-          image: IMG.render2,
+            "Structure, systems, power, energy and detailing are calculated and developed into production-ready drawings.",
+          image: IMG.editorialWerf6,
         },
         {
           index: "03",
           title: "Hull construction",
           body:
-            "The aluminium hull takes shape. Plates are cut, formed and welded by hand into a strong, light and precise whole.",
+            "Aluminium construction, welding and quality control. Plates are cut, formed and welded by hand into a strong, light and precise hull.",
           image: IMG.casco2,
           gallery: [IMG.casco1, IMG.casco3, IMG.casco4, IMG.casco5],
         },
         {
           index: "04",
-          title: "Installation",
+          title: "Fit-out & systems",
           body:
-            "Propulsion — conventional, hybrid or fully electric — and all systems are expertly installed and connected.",
-          image: IMG.casco5,
-        },
-        {
-          index: "05",
-          title: "Interior & finishing",
-          body:
-            "The interior is drawn and built to measure. Wood, upholstery and finish make the vessel personal and complete.",
+            "Interior, installations, propulsion and deck equipment — conventional, hybrid or fully electric — expertly installed and finished to measure.",
           image: IMG.salon15,
           gallery: [IMG.salon5, IMG.salon25],
         },
         {
-          index: "06",
-          title: "Sea trial",
+          index: "05",
+          title: "Testing & handover",
           body:
-            "We test the yacht extensively on the water. Performance, systems and finish are precisely fine-tuned.",
-          image: IMG.editorialPanorama2,
-        },
-        {
-          index: "07",
-          title: "Handover",
-          body:
-            "You step aboard a complete, sailing yacht. We stay involved, well beyond delivery.",
-          image: IMG.veluvia1,
+            "Commissioning, sea trial, documentation and instruction. You step aboard a complete, certified and sailing vessel.",
+          image: IMG.editorialPanorama4,
         },
       ],
       ctaTitle: "Your yacht begins with a conversation",
