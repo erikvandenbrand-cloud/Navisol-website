@@ -1,0 +1,246 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Brand */
+    --navisol-blue: 198 45% 50%;
+    --navisol-blue-dark: 200 42% 38%;
+    --navisol-blue-light: 198 48% 62%;
+
+    /* Editorial palette */
+    --bone: 40 30% 97%;          /* warm off-white */
+    --bone-2: 40 20% 94%;        /* slightly deeper warm */
+    --paper: 0 0% 100%;
+    --ink: 205 32% 12%;          /* deep blue-charcoal */
+    --ink-2: 205 24% 20%;
+    --ink-soft: 205 12% 34%;     /* body text */
+    --ink-mute: 205 10% 50%;     /* secondary */
+    --line: 210 16% 86%;
+    --line-dark: 205 20% 26%;
+    --accent: 198 48% 46%;
+    --accent-light: 198 50% 60%;
+
+    /* shadcn-compat tokens */
+    --background: 40 30% 97%;
+    --foreground: 205 32% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 205 32% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 205 32% 12%;
+    --primary: 198 48% 46%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 40 20% 94%;
+    --secondary-foreground: 205 32% 12%;
+    --muted: 40 20% 94%;
+    --muted-foreground: 205 12% 34%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 210 16% 86%;
+    --input: 210 16% 86%;
+    --ring: 198 48% 46%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: hsl(var(--bone));
+    color: hsl(var(--ink-soft));
+    font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-fraunces), Georgia, "Times New Roman", serif;
+    color: hsl(var(--ink));
+    font-weight: 480;
+    line-height: 1.04;
+    letter-spacing: -0.015em;
+    font-optical-sizing: auto;
+  }
+
+  p {
+    line-height: 1.7;
+  }
+
+  ::selection {
+    background: hsl(var(--accent) / 0.22);
+    color: hsl(var(--ink));
+  }
+}
+
+@layer components {
+  .container-wide {
+    @apply mx-auto w-full max-w-[1440px] px-6 md:px-10 lg:px-16;
+  }
+
+  .container-narrow {
+    @apply mx-auto w-full max-w-3xl px-6 md:px-10;
+  }
+
+  .eyebrow {
+    font-family: var(--font-inter), sans-serif;
+    @apply text-[11px] font-semibold uppercase tracking-[0.28em];
+    color: hsl(var(--accent));
+  }
+
+  .eyebrow-muted {
+    font-family: var(--font-inter), sans-serif;
+    @apply text-[11px] font-semibold uppercase tracking-[0.28em];
+    color: hsl(var(--ink-mute));
+  }
+
+  .display-hero {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 460;
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    font-size: clamp(2.75rem, 7vw, 6rem);
+  }
+
+  .display-section {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 470;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    font-size: clamp(2rem, 4.5vw, 3.75rem);
+  }
+
+  .lead {
+    @apply text-lg md:text-xl;
+    line-height: 1.6;
+    color: hsl(var(--ink-soft));
+  }
+
+  /* Pill / round buttons */
+  .btn-round {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium transition-all duration-300;
+  }
+  .btn-solid {
+    background: hsl(var(--accent));
+    color: #fff;
+  }
+  .btn-solid:hover {
+    background: hsl(var(--navisol-blue-dark));
+    transform: translateY(-1px);
+  }
+  .btn-ink {
+    background: hsl(var(--ink));
+    color: hsl(var(--bone));
+  }
+  .btn-ink:hover {
+    background: hsl(var(--ink-2));
+    transform: translateY(-1px);
+  }
+  .btn-outline-ink {
+    border: 1px solid hsl(var(--ink) / 0.35);
+    color: hsl(var(--ink));
+  }
+  .btn-outline-ink:hover {
+    background: hsl(var(--ink));
+    color: hsl(var(--bone));
+  }
+  .btn-outline-light {
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    color: #fff;
+  }
+  .btn-outline-light:hover {
+    background: #fff;
+    color: hsl(var(--ink));
+  }
+
+  .link-underline {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .link-underline:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  .section {
+    @apply py-20 md:py-28 lg:py-32;
+  }
+  .section-sm {
+    @apply py-14 md:py-20;
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  @keyframes floatDown {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(6px); opacity: 1; }
+  }
+  .animate-scroll-hint {
+    animation: floatDown 2s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
