@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, ArrowDown } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
 import { content } from "@/lib/content";
 import { Reveal } from "@/components/reveal";
 import { PlaceholderImage } from "@/components/placeholder-image";
-import { EditorialRow, CtaBand, HeroMedia } from "@/components/sections";
+import { HeroSlideshow } from "@/components/hero-slideshow";
+import { ClientLogos } from "@/components/client-logos";
+import { EditorialRow, CtaBand } from "@/components/sections";
 
 export default function HomePage() {
   const { lang } = useLanguage();
@@ -14,51 +16,44 @@ export default function HomePage() {
 
   return (
     <>
-      {/* ============ HERO ============ */}
-      <section className="relative flex min-h-[100svh] items-center overflow-hidden">
-        <HeroMedia
-          image={t.heroImage}
-          video={t.heroVideo}
-          alt="Navisol"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--ink))]/70 via-[hsl(var(--ink))]/45 to-[hsl(var(--ink))]/75" />
+      {/* ============ HERO — calm & light ============ */}
+      <section className="bg-[hsl(var(--bone))] pt-32 pb-14 md:pt-40 md:pb-20">
+        <div className="container-wide grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
+          <div className="lg:col-span-6">
+            <Reveal>
+              <p className="eyebrow">{t.heroEyebrow}</p>
+            </Reveal>
+            <Reveal delay={100}>
+              <h1 className="display-hero mt-6 text-balance text-[hsl(var(--ink))]">
+                {t.heroTitle}
+              </h1>
+            </Reveal>
+            <Reveal delay={200}>
+              <p className="lead mt-7 max-w-xl">{t.heroLead}</p>
+            </Reveal>
+            <Reveal delay={300}>
+              <div className="mt-9 flex flex-wrap items-center gap-4">
+                <Link href="/our-work" className="btn-round btn-solid">
+                  {lang === "nl" ? "Bekijk ons werk" : "See our work"}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link href="/contact" className="btn-round btn-outline-ink">
+                  {content[lang].nav.cta}
+                </Link>
+              </div>
+            </Reveal>
+          </div>
 
-        <div className="container-wide relative z-10 pt-24">
-          <Reveal>
-            <p className="eyebrow text-[hsl(var(--accent-light))]">{t.heroEyebrow}</p>
-          </Reveal>
-          <Reveal delay={120}>
-            <h1 className="display-hero mt-6 max-w-5xl text-balance text-white">
-              {t.heroTitle}
-            </h1>
-          </Reveal>
-          <Reveal delay={240}>
-            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/85 md:text-xl">
-              {t.heroLead}
-            </p>
-          </Reveal>
-          <Reveal delay={360}>
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <Link href="/our-work" className="btn-round btn-solid">
-                {lang === "nl" ? "Bekijk ons werk" : "See our work"}
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link href="/contact" className="btn-round btn-outline-light">
-                {content[lang].nav.cta}
-              </Link>
+          <Reveal className="lg:col-span-6" delay={200}>
+            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl md:aspect-[5/4]">
+              <HeroSlideshow images={t.heroImages} alt="Navisol jachten" />
             </div>
           </Reveal>
         </div>
-
-        {/* Scroll hint */}
-        <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-white/70">
-          <div className="flex flex-col items-center gap-2">
-            <span className="text-[10px] uppercase tracking-[0.3em]">{t.scroll}</span>
-            <ArrowDown className="h-4 w-4 animate-scroll-hint" />
-          </div>
-        </div>
       </section>
+
+      {/* ============ CLIENT LOGOS ============ */}
+      <ClientLogos eyebrow={t.clientsEyebrow} />
 
       {/* ============ TWO PILLARS ============ */}
       <section className="section-sm">
@@ -88,6 +83,33 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ============ DESIGN IN 3D — contained video ============ */}
+      <section className="section-sm">
+        <div className="container-wide grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
+          <Reveal className="lg:col-span-5">
+            <p className="eyebrow">{t.designEyebrow}</p>
+            <h2 className="display-section mt-4 text-balance">{t.designTitle}</h2>
+            <p className="lead mt-6">{t.designBody}</p>
+          </Reveal>
+          <Reveal className="lg:col-span-7" delay={120}>
+            <div className="relative aspect-video overflow-hidden rounded-xl border border-[hsl(var(--line))] shadow-[0_24px_60px_-24px_rgba(20,40,55,0.35)]">
+              <video
+                className="absolute inset-0 h-full w-full origin-[50%_42%] scale-[1.32] object-cover"
+                poster={t.heroImage}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-label={t.designTitle}
+              >
+                <source src={t.heroVideo} type="video/mp4" />
+              </video>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ============ EDITORIAL STORY ============ */}
       <div className="container-wide pt-8">
         <Reveal>
@@ -98,6 +120,42 @@ export default function HomePage() {
       {t.editorial.map((block, i) => (
         <EditorialRow key={i} block={block} />
       ))}
+
+      {/* ============ ONDER DE HUID — techniek ============ */}
+      <section className="section bg-[hsl(var(--bone-2))]">
+        <div className="container-wide">
+          <div className="grid gap-8 lg:grid-cols-12 lg:gap-16">
+            <Reveal className="lg:col-span-5">
+              <p className="eyebrow">{t.techEyebrow}</p>
+              <h2 className="display-section mt-4 text-balance">{t.techTitle}</h2>
+            </Reveal>
+            <div className="lg:col-span-7">
+              <div className="grid gap-x-10 gap-y-8 sm:grid-cols-2">
+                {t.techItems.map((item, i) => (
+                  <Reveal key={item.title} delay={i * 80}>
+                    <div className="border-t border-[hsl(var(--ink))]/15 pt-5">
+                      <h3 className="font-[family-name:var(--font-fraunces)] text-xl text-[hsl(var(--ink))]">
+                        {item.title}
+                      </h3>
+                      <p className="mt-3 text-[15px] leading-relaxed text-[hsl(var(--ink-soft))]">
+                        {item.body}
+                      </p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <Reveal>
+            <div className="mt-12 rounded-xl bg-[hsl(var(--ink))] px-8 py-6 text-center md:mt-16">
+              <p className="font-[family-name:var(--font-fraunces)] text-xl text-white md:text-2xl">
+                {t.techStatement}
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
 
       {/* ============ QUOTE BAND ============ */}
       <section className="bg-[hsl(var(--bone-2))]">
