@@ -36,7 +36,10 @@ export function Navigation() {
     };
   }, [menuOpen]);
 
-  const solid = scrolled || menuOpen;
+  // The homepage now has a light hero, so the nav needs its dark/solid
+  // styling from the top there. Other pages still open with a dark hero image.
+  const lightHero = pathname === "/";
+  const solid = scrolled || menuOpen || lightHero;
 
   return (
     <header

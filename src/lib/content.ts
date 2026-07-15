@@ -15,6 +15,12 @@ export const IMG = {
   logoCenterParcs: "/images/logos/centerparcs.png",
   logoStromma: "/images/logos/stromma.jpg",
   logoEagleBoats: "/images/logos/eagleboats.png",
+  logoEcoBoats: "/images/logos/ecoboats.png",
+  logoVeluvia: "/images/logos/veluvia.png",
+  logoHappyWhale: "/images/logos/happywhale.png",
+  logoArgoMaritime: "/images/logos/argomaritime.png",
+  logoAlni: "/images/logos/alni.png",
+  logoLongfish: "/images/logos/longfishleisure.png",
 
   editorial1: "/images/editorial-01.jpg",
   editorialPanorama2: "/images/editorial-02-panorama.jpg",
@@ -69,12 +75,12 @@ export const CLIENTS: Client[] = [
   { name: "Center Parcs", logo: IMG.logoCenterParcs },
   { name: "Stromma", logo: IMG.logoStromma },
   { name: "Eagle Boats", logo: IMG.logoEagleBoats },
-  { name: "Eco Boats Amsterdam" },
-  { name: "Veluvia" },
-  { name: "Longfish Leisure" },
-  { name: "HappyWhale" },
-  { name: "Argo Maritime" },
-  { name: "ALNI Technical Bureau" },
+  { name: "Eco Boats Amsterdam", logo: IMG.logoEcoBoats },
+  { name: "Veluvia", logo: IMG.logoVeluvia },
+  { name: "Longfish Leisure", logo: IMG.logoLongfish },
+  { name: "HappyWhale", logo: IMG.logoHappyWhale },
+  { name: "Argo Maritime", logo: IMG.logoArgoMaritime },
+  { name: "ALNI Technical Bureau", logo: IMG.logoAlni },
 ];
 
 export interface EditorialBlock {
