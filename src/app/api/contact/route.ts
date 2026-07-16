@@ -1,32 +1,15 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { RECIPIENTS, getFrom, getTransporter, escapeHtml } from "@/lib/mail";
 
 // Nodemailer needs the Node.js runtime (net/tls), not the Edge runtime.
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-
-// Recipients — override with the CONTACT_TO env var (comma-separated) if needed.
-const TO = (
-  process.env.CONTACT_TO ??
-  "sales@navisol.nl, info@navisol.nl, erik@navisol.nl"
-)
-  .split(",")
-  .map((s) => s.trim())
-  .filter(Boolean);
 
 const SUBJECT_LABELS: Record<string, string> = {
   custom: "Jachtbouw op maat",
   partner: "Ontwikkel- & bouwpartner",
   other: "Iets anders",
 };
-
-function escapeHtml(value: unknown) {
-  return String(value ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
 
 export async function POST(req: Request) {
   try {
@@ -53,13 +36,8 @@ export async function POST(req: Request) {
       );
     }
 
-    const host = process.env.SMTP_HOST;
-    const port = Number(process.env.SMTP_PORT ?? 465);
-    const user = process.env.SMTP_USER;
-    const pass = process.env.SMTP_PASS;
-    const from = process.env.CONTACT_FROM ?? user;
-
-    if (!host || !user || !pass) {
+    const transporter = getTransporter();
+    if (!transporter) {
       console.error(
         "SMTP is not configured. Set SMTP_HOST, SMTP_USER and SMTP_PASS.",
       );
@@ -68,13 +46,6 @@ export async function POST(req: Request) {
         { status: 500 },
       );
     }
-
-    const transporter = nodemailer.createTransport({
-      host,
-      port,
-      secure: port === 465, // true for 465 (SSL), false for 587 (STARTTLS)
-      auth: { user, pass },
-    });
 
     const subjectLabel = SUBJECT_LABELS[subject] ?? subject ?? "—";
 
@@ -110,8 +81,8 @@ export async function POST(req: Request) {
     `;
 
     await transporter.sendMail({
-      from: `"Navisol website" <${from}>`,
-      to: TO,
+      from: `"Navisol website" <${getFrom()}>`,
+      to: RECIPIENTS,
       replyTo: `"${String(name).replace(/"/g, "")}" <${email}>`,
       subject: `Contactformulier — ${subjectLabel} (${name})`,
       text,

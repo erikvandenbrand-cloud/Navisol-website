@@ -113,30 +113,40 @@ export function Navigation() {
         </div>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — full-screen opaque overlay */}
       <div
+        style={{ backgroundColor: "hsl(var(--bone))" }}
         className={cn(
-          "fixed inset-0 z-40 flex flex-col bg-[hsl(var(--bone))] px-6 pt-28 transition-all duration-500 lg:hidden",
+          "fixed inset-0 z-40 lg:hidden transition-opacity duration-300",
           menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         )}
       >
-        <div className="flex flex-col gap-1">
-          {NAV_LINKS.map((link, i) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="border-b border-[hsl(var(--line))] py-4 font-[family-name:var(--font-fraunces)] text-3xl text-[hsl(var(--ink))]"
-              style={{ transitionDelay: `${i * 40}ms` }}
-            >
-              {t[link.key]}
+        <div className="flex h-full flex-col overflow-y-auto px-6 pb-10 pt-28">
+          <div className="flex flex-col">
+            {NAV_LINKS.map((link) => {
+              const active = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    "border-b border-[hsl(var(--line))] py-4 font-[family-name:var(--font-fraunces)] text-3xl transition-colors",
+                    active
+                      ? "text-[hsl(var(--accent))]"
+                      : "text-[hsl(var(--ink))]"
+                  )}
+                >
+                  {t[link.key]}
+                </Link>
+              );
+            })}
+          </div>
+          <div className="mt-8 flex items-center justify-between">
+            <LangSwitch lang={lang} setLang={setLang} solid />
+            <Link href="/contact" className="btn-round btn-solid">
+              {t.cta}
             </Link>
-          ))}
-        </div>
-        <div className="mt-8 flex items-center justify-between">
-          <LangSwitch lang={lang} setLang={setLang} solid />
-          <Link href="/contact" className="btn-round btn-solid">
-            {t.cta}
-          </Link>
+          </div>
         </div>
       </div>
     </header>

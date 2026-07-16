@@ -255,7 +255,7 @@ export const content: Record<Lang, Dict> = {
     },
     home: {
       heroEyebrow: "Aluminium jachtbouw · Elburg, Nederland",
-      heroTitle: "Van eerste schets tot varend jacht.",
+      heroTitle: "Van eerste schets tot varend schip.",
       heroLead:
         "Navisol ontwerpt en bouwt aluminium jachten op maat — en is de vaste ontwikkel- en bouwpartner voor botenmerken. Alles onder één dak.",
       scroll: "Ontdek",
@@ -353,7 +353,7 @@ export const content: Record<Lang, Dict> = {
         },
         {
           layout: "full",
-          title: "Van eerste schets tot varend jacht.",
+          title: "Van eerste schets tot varend schip.",
           image: IMG.editorialPanorama4,
         },
       ],
@@ -620,7 +620,7 @@ export const content: Record<Lang, Dict> = {
     },
     home: {
       heroEyebrow: "Aluminium yacht building · Elburg, The Netherlands",
-      heroTitle: "From first sketch to sailing yacht.",
+      heroTitle: "From first sketch to sailing vessel.",
       heroLead:
         "Navisol designs and builds bespoke aluminium yachts — and is the trusted development and build partner for boat brands. Everything under one roof.",
       scroll: "Discover",
@@ -718,7 +718,7 @@ export const content: Record<Lang, Dict> = {
         },
         {
           layout: "full",
-          title: "From first sketch to sailing yacht.",
+          title: "From first sketch to sailing vessel.",
           image: IMG.editorialPanorama4,
         },
       ],
