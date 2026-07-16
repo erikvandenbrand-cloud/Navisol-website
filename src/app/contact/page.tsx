@@ -10,6 +10,9 @@ export default function ContactPage() {
   const { lang } = useLanguage();
   const t = content[lang].contact;
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(false);
+  const [botField, setBotField] = useState("");
 
   const [form, setForm] = useState({
     name: "",
@@ -20,9 +23,23 @@ export default function ContactPage() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setError(false);
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, botField }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      setSubmitted(true);
+    } catch {
+      setError(true);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -91,6 +108,19 @@ export default function ContactPage() {
                 </p>
               ) : (
                 <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+                  <p className="hidden" aria-hidden="true">
+                    <label>
+                      Laat dit veld leeg:{" "}
+                      <input
+                        name="bot-field"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        value={botField}
+                        onChange={(e) => setBotField(e.target.value)}
+                      />
+                    </label>
+                  </p>
+
                   <div className="grid gap-5 sm:grid-cols-2">
                     <Field
                       id="name"
@@ -158,9 +188,19 @@ export default function ContactPage() {
                     />
                   </div>
 
-                  <button type="submit" className="btn-round btn-ink w-full sm:w-auto">
-                    {t.send}
-                    <ArrowRight className="h-4 w-4" />
+                  {error && (
+                    <p className="text-sm text-red-600" role="alert">
+                      {t.error}
+                    </p>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="btn-round btn-ink w-full sm:w-auto disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    {submitting ? t.sending : t.send}
+                    {!submitting && <ArrowRight className="h-4 w-4" />}
                   </button>
                 </form>
               )}

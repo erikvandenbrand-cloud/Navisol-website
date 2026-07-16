@@ -228,6 +228,8 @@ type Dict = {
     message: string;
     send: string;
     success: string;
+    sending: string;
+    error: string;
   };
   footer: {
     tagline: string;
@@ -269,7 +271,7 @@ export const content: Record<Lang, Dict> = {
       designEyebrow: "In 3D ontworpen",
       designTitle: "Elk jacht begint als ontwerp",
       designBody:
-        "Voordat er ook maar één plaat aluminium wordt gesneden, komt elk jacht tot leven in 3D. Zo klopt elke lijn — en weet u precies wat u krijgt — nog voordat de bouw begint.",
+        "Voordat er ook maar één plaat aluminium wordt gesneden, komt elk jacht tot leven in 3D. Zo klopt elke lijn — en weet je precies wat je krijgt — nog voordat de bouw begint.",
       clientsEyebrow: "Vertrouwd door toonaangevende organisaties",
       techEyebrow: "Onder de huid",
       techTitle: "Techniek die klopt. Bouw die blijft.",
@@ -310,9 +312,9 @@ export const content: Record<Lang, Dict> = {
         {
           layout: "left",
           eyebrow: "Materiaal",
-          title: "Aluminium, tot in de kleinste naad",
+          title: "Aluminium, perfectie tot in de kleinste details",
           body:
-            "Aluminium vraagt om vakmanschap. Elke las, elk spant en elke plaat wordt met de hand gecontroleerd. Het resultaat is een casco dat sterk is, licht vaart en decennialang meegaat.",
+            "Aluminium vraagt om vakmanschap. Elke las, elk spant en elke plaat wordt met de hand gecontroleerd. Het resultaat is een casco dat sterk is, licht vaart en decennialang meegaat en gerecycled kan worden.",
           image: IMG.editorialWerf5,
         },
         {
@@ -325,7 +327,7 @@ export const content: Record<Lang, Dict> = {
           eyebrow: "Onder één dak",
           title: "Ontworpen én gebouwd op één plek",
           body:
-            "Ontwerp, engineering, cascobouw, installatie en afbouw gebeuren in dezelfde werf. Korte lijnen, één aanspreekpunt en volledige grip op kwaliteit en planning.",
+            "Ontwerp, engineering, cascobouw, installatie en afbouw gebeuren door dezelfde werf. Korte lijnen, één aanspreekpunt en volledige grip op kwaliteit en planning.",
           image: IMG.editorialWerf6,
         },
         {
@@ -338,7 +340,7 @@ export const content: Record<Lang, Dict> = {
           eyebrow: "Compleet",
           title: "Van casco tot compleet interieur",
           body:
-            "Of het nu gaat om een nieuw jacht of een volledige refit — wij leveren varende, complete schepen. Inclusief een interieur dat op maat is getekend en gebouwd.",
+            "Wij leveren varende, complete schepen. Inclusief een interieur dat op maat is getekend en gebouwd.",
           image: IMG.editorial1,
         },
         {
@@ -359,7 +361,7 @@ export const content: Record<Lang, Dict> = {
       quoteAuthor: "Navisol",
       ctaTitle: "Laten we kennismaken",
       ctaBody:
-        "Een eigen jacht voor ogen, of op zoek naar een bouwpartner voor uw merk? We denken graag met u mee.",
+        "Een eigen jacht voor ogen, of op zoek naar een bouwpartner voor jouw merk? We denken graag met je mee.",
       ctaButton: "Neem contact op",
     },
     custom: {
@@ -368,16 +370,16 @@ export const content: Record<Lang, Dict> = {
       heroLead:
         "Complete aluminium jachten tot circa 15 meter, inclusief interieur. Van eerste lijn tot proefvaart — bij Navisol komt alles samen.",
       heroImage: IMG.editorial1,
-      introTitle: "Uw jacht, van A tot Z",
+      introTitle: "Jouw jacht, van A tot Z",
       introBody:
-        "Een jacht op maat begint bij uw verhaal en eindigt bij uw eerste vaart. Wij begeleiden elke stap, ontwerpen en bouwen alles zelf, en leveren een schip dat volledig van u is — tot in het kleinste detail van het interieur.",
+        "Een jacht op maat begint bij jouw verhaal en eindigt bij jouw eerste vaart. Wij begeleiden elke stap, ontwerpen en bouwen alles zelf, en leveren een schip dat volledig van jou is — tot in het kleinste detail van het interieur.",
       stepsEyebrow: "Van idee naar water",
       steps: [
         {
           index: "01",
           title: "Schets & concept",
           body:
-            "Vaarprofiel, indeling, uitstraling en eerste richting. Uw wensen vertalen we naar een 3D-ontwerp dat klopt op het water én in gebruik.",
+            "Vaarprofiel, indeling, uitstraling en eerste richting. Jouw wensen vertalen we naar een 3D-ontwerp dat klopt op het water én in gebruik.",
           image: IMG.render1,
           gallery: [IMG.render2, IMG.render3],
         },
@@ -408,13 +410,13 @@ export const content: Record<Lang, Dict> = {
           index: "05",
           title: "Testen & opleveren",
           body:
-            "Inbedrijfstelling, proefvaart, dossier en instructie. U stapt aan boord van een compleet, gecertificeerd en varend schip.",
+            "Inbedrijfstelling, proefvaart, dossier en instructie. Je stapt aan boord van een compleet, gecertificeerd en varend schip.",
           image: IMG.editorialPanorama4,
         },
       ],
-      ctaTitle: "Uw jacht begint met een gesprek",
+      ctaTitle: "Jouw jacht begint met een gesprek",
       ctaBody:
-        "Vertel ons wat u voor ogen heeft. We denken graag mee over de mogelijkheden.",
+        "Vertel ons wat je voor ogen hebt. We denken graag mee over de mogelijkheden.",
       ctaButton: "Plan een kennismaking",
     },
     partner: {
@@ -428,7 +430,7 @@ export const content: Record<Lang, Dict> = {
           eyebrow: "Meer dan een bouwer",
           title: "Wij denken mee, vanaf het eerste idee",
           body:
-            "Navisol is meer dan een bouwer. We denken mee in slim ontwerp, engineering en produceerbaarheid — zodat uw product niet alleen mooi is, maar ook slim te maken en te varen.",
+            "Navisol is meer dan een bouwer. We denken mee in slim ontwerp, engineering en produceerbaarheid — zodat jouw product niet alleen mooi is, maar ook slim te maken en te varen.",
           image: IMG.editorialWerf6,
         },
         {
@@ -436,11 +438,11 @@ export const content: Record<Lang, Dict> = {
           eyebrow: "Eén aanspreekpunt",
           title: "Van concept tot eindproduct, onder één dak",
           body:
-            "Eén verantwoordelijke partij voor het hele traject. Ontwerp, engineering en productie komen bij ons samen, waardoor u rust, snelheid en grip houdt gedurende het hele project.",
+            "Eén verantwoordelijke partij voor het hele traject. Ontwerp, engineering en productie komen bij ons samen, waardoor je rust, snelheid en grip houdt gedurende het hele project.",
           image: IMG.casco3,
         },
       ],
-      statement: "U kent uw merk. Wij weten hoe je het bouwt.",
+      statement: "Jij kent jouw merk. Wij weten hoe je het bouwt.",
       brandEyebrow: "Merkwerk",
       brandTitle: "Gebouwd voor het merk Eagle",
       brandBody:
@@ -448,7 +450,7 @@ export const content: Record<Lang, Dict> = {
       brandImages: [IMG.eagle28_1, IMG.eagle28_3, IMG.eagle25_1],
       ctaTitle: "Laten we verkennen wat mogelijk is",
       ctaBody:
-        "Denkt u aan een nieuwe lijn, een doorontwikkeling of een betrouwbare bouwpartner? We gaan graag het gesprek aan.",
+        "Denk je aan een nieuwe lijn, een doorontwikkeling of een betrouwbare bouwpartner? We gaan graag het gesprek aan.",
       ctaButton: "Neem contact op",
     },
     work: {
@@ -526,8 +528,8 @@ export const content: Record<Lang, Dict> = {
           layout: "full",
         },
       ],
-      ctaTitle: "Uw project op deze pagina?",
-      ctaBody: "We vertellen u graag hoe we uw jacht of product realiseren.",
+      ctaTitle: "Jouw project op deze pagina?",
+      ctaBody: "We vertellen je graag hoe we jouw jacht of product realiseren.",
       ctaButton: "Neem contact op",
     },
     about: {
@@ -541,7 +543,7 @@ export const content: Record<Lang, Dict> = {
       story: [
         "Navisol is geworteld in de maritieme wereld. Vanuit Elburg ontwerpen en bouwen we aluminium jachten op maat en werken we als ontwikkel- en bouwpartner voor botenmerken.",
         "Wat ons kenmerkt is de combinatie van technische precisie en Nederlands vakmanschap. Ontwerp, engineering en bouw komen samen onder één dak, waardoor we volledige grip houden op kwaliteit, planning en communicatie.",
-        "We bouwen niet in aantallen, maar in schepen die blijven. Elk project is een samenwerking — of het nu een eigen jacht is of een product voor uw merk.",
+        "We bouwen niet in aantallen, maar in schepen die blijven. Elk project is een samenwerking — of het nu een eigen jacht is of een product voor jouw merk.",
       ],
       valuesEyebrow: "Waar we voor staan",
       values: [
@@ -561,7 +563,7 @@ export const content: Record<Lang, Dict> = {
             "Heldere afspraken, realistische planningen en een schip dat klopt.",
         },
       ],
-      ctaTitle: "Benieuwd wat we voor u kunnen betekenen?",
+      ctaTitle: "Benieuwd wat we voor jou kunnen betekenen?",
       ctaBody: "We maken graag kennis, persoonlijk of op de werf.",
       ctaButton: "Neem contact op",
     },
@@ -569,7 +571,7 @@ export const content: Record<Lang, Dict> = {
       heroEyebrow: "Contact",
       heroTitle: "Laten we kennismaken",
       heroLead:
-        "Een eigen jacht voor ogen of op zoek naar een bouwpartner? We horen graag van u.",
+        "Een eigen jacht voor ogen of op zoek naar een bouwpartner? We horen graag van je.",
       infoTitle: "Navisol",
       visit: "Bezoek",
       call: "Bel",
@@ -589,7 +591,10 @@ export const content: Record<Lang, Dict> = {
       ],
       message: "Bericht",
       send: "Verstuur bericht",
-      success: "Bedankt voor uw bericht. We nemen snel contact met u op.",
+      success: "Bedankt voor je bericht. We nemen snel contact met je op.",
+      sending: "Bezig met verzenden…",
+      error:
+        "Er ging iets mis bij het verzenden. Mail ons gerust direct op info@navisol.nl.",
     },
     footer: {
       tagline:
@@ -672,9 +677,9 @@ export const content: Record<Lang, Dict> = {
         {
           layout: "left",
           eyebrow: "Material",
-          title: "Aluminium, down to the finest seam",
+          title: "Aluminium, perfection down to the finest detail",
           body:
-            "Aluminium demands craftsmanship. Every weld, frame and plate is checked by hand. The result is a hull that is strong, sails light and lasts for decades.",
+            "Aluminium demands craftsmanship. Every weld, frame and plate is checked by hand. The result is a hull that is strong, sails light, lasts for decades and can be recycled.",
           image: IMG.editorialWerf5,
         },
         {
@@ -700,7 +705,7 @@ export const content: Record<Lang, Dict> = {
           eyebrow: "Complete",
           title: "From hull to complete interior",
           body:
-            "Whether it is a new yacht or a full refit — we deliver complete, sailing vessels. Including an interior that is drawn and built entirely to measure.",
+            "We deliver complete, sailing vessels. Including an interior that is drawn and built entirely to measure.",
           image: IMG.editorial1,
         },
         {
@@ -949,6 +954,9 @@ export const content: Record<Lang, Dict> = {
       message: "Message",
       send: "Send message",
       success: "Thank you for your message. We'll be in touch soon.",
+      sending: "Sending…",
+      error:
+        "Something went wrong while sending. Feel free to email us directly at info@navisol.nl.",
     },
     footer: {
       tagline:
