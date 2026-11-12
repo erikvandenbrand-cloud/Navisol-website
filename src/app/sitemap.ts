@@ -1,7 +1,9 @@
 import { MetadataRoute } from "next";
 import { getExtraPageSlugs } from "@/sanity/pages";
 
-export const revalidate = 60;
+// Dynamisch, zodat nieuwe landingspagina's direct in de sitemap komen. De
+// Sanity-aanvraag zelf wordt 60 seconden gecachet (zie getExtraPageSlugs).
+export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://www.navisol.nl";
