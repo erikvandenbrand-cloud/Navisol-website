@@ -9,7 +9,14 @@ export const RECIPIENTS = (
 
 /** Afzender: een adres op een in Resend geverifieerd domein (bijv. website@navisol.nl). */
 export function getFrom() {
-  return process.env.CONTACT_FROM ?? "onboarding@resend.dev";
+  // Accepteert "website@navisol.nl" én "Naam <website@navisol.nl>", ook met
+  // losse aanhalingstekens of spaties uit de Vercel-instelling.
+  const raw = (process.env.CONTACT_FROM ?? "")
+    .trim()
+    .replace(/^['"]+|['"]+$/g, "")
+    .trim();
+  const email = raw.match(/<([^>]+)>/)?.[1] ?? raw;
+  return email.trim() || "onboarding@resend.dev";
 }
 
 /** Is de mailservice (Resend) ingesteld? */
