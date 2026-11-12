@@ -108,6 +108,8 @@ export interface WorkItem {
   body: string;
   images: string[];
   video?: string;
+  /** Optionele link naar een eigen pagina over dit project, bijv. /veluvia-920 */
+  href?: string;
   layout: "left" | "right" | "full";
 }
 
@@ -486,6 +488,7 @@ export const content: Record<Lang, Dict> = {
           body:
             "Een strakke aluminium sloep met tijdloze lijnen. Comfortabel, stil en gebouwd om lang mee te gaan.",
           images: [IMG.veluvia1, IMG.veluvia2],
+          href: "/veluvia-920",
           layout: "left",
         },
         {
@@ -851,6 +854,7 @@ export const content: Record<Lang, Dict> = {
           body:
             "A sleek aluminium sloop with timeless lines. Comfortable, quiet and built to last.",
           images: [IMG.veluvia1, IMG.veluvia2],
+          href: "/veluvia-920",
           layout: "left",
         },
         {
