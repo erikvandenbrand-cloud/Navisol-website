@@ -4,8 +4,7 @@ import "./globals.css";
 import ClientBody from "./ClientBody";
 import Script from "next/script";
 import { LanguageProvider } from "@/contexts/language-context";
-import { Navigation } from "@/components/navigation";
-import { Footer } from "@/components/footer";
+import { SiteChrome } from "@/components/site-chrome";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -54,9 +53,7 @@ export default function RootLayout({
       <body suppressHydrationWarning className="antialiased">
         <LanguageProvider>
           <ClientBody>
-            <Navigation />
-            <main>{children}</main>
-            <Footer />
+            <SiteChrome>{children}</SiteChrome>
           </ClientBody>
         </LanguageProvider>
       </body>
