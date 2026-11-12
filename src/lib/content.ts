@@ -482,7 +482,7 @@ export const content: Record<Lang, Dict> = {
           slug: "veluvia-920",
           title: "Veluvia 920",
           category: "Jacht op maat",
-          year: "2023",
+          year: "2026",
           body:
             "Een strakke aluminium sloep met tijdloze lijnen. Comfortabel, stil en gebouwd om lang mee te gaan.",
           images: [IMG.veluvia1, IMG.veluvia2],
@@ -847,7 +847,7 @@ export const content: Record<Lang, Dict> = {
           slug: "veluvia-920",
           title: "Veluvia 920",
           category: "Custom yacht",
-          year: "2023",
+          year: "2026",
           body:
             "A sleek aluminium sloop with timeless lines. Comfortable, quiet and built to last.",
           images: [IMG.veluvia1, IMG.veluvia2],
