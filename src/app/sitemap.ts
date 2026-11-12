@@ -1,8 +1,9 @@
 import { MetadataRoute } from "next";
+import { getExtraPageSlugs } from "@/sanity/pages";
 
-export const dynamic = "force-static";
+export const revalidate = 60;
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://www.navisol.nl";
   const now = new Date();
 
@@ -15,7 +16,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/contact", priority: 0.7, freq: "yearly" as const },
   ];
 
-  return routes.map((route) => ({
+  // Landingspagina's uit Sanity
+  const extra = (await getExtraPageSlugs()).map((slug) => ({
+    path: `/${slug}`,
+    priority: 0.6,
+    freq: "monthly" as const,
+  }));
+
+  return [...routes, ...extra].map((route) => ({
     url: `${baseUrl}${route.path}`,
     lastModified: now,
     changeFrequency: route.freq,
