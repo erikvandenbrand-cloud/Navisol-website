@@ -15,6 +15,7 @@ type Doc = {
   body?: Bi;
   images?: { asset?: { _ref?: string } }[];
   video?: string;
+  href?: string;
   layout?: WorkItem["layout"];
 };
 
@@ -30,7 +31,7 @@ export async function getWorkItems(): Promise<{ nl: WorkItem[]; en: WorkItem[] }
     const docs = await client.fetch<Doc[]>(
       `*[_type == "workItem"] | order(order asc){
         title, "slug": slug.current, category, year, status, body,
-        images[]{asset}, video, layout
+        images[]{asset}, video, href, layout
       }`,
       {},
       { next: { revalidate: REVALIDATE_SECONDS } },
@@ -48,6 +49,7 @@ export async function getWorkItems(): Promise<{ nl: WorkItem[]; en: WorkItem[] }
           .filter((i) => i.asset?._ref)
           .map((i) => builder.image(i).width(1600).auto("format").url()),
         video: d.video || undefined,
+        href: d.href || undefined,
         layout: d.layout ?? "left",
       }));
     return { nl: build("nl"), en: build("en") };

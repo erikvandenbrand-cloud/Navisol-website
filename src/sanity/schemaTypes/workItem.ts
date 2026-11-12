@@ -38,6 +38,14 @@ export const workItem = defineType({
     }),
     defineField({ name: "video", title: "Video (link naar .mp4)", type: "url" }),
     defineField({
+      name: "href",
+      title: "Link naar eigen pagina (optioneel)",
+      type: "string",
+      description: "Bijv. /veluvia-920. De titel van het project wordt dan een link.",
+      validation: (r) =>
+        r.custom((v) => !v || (typeof v === "string" && v.startsWith("/")) || "Begin met een /, bijv. /veluvia-920"),
+    }),
+    defineField({
       name: "layout",
       title: "Opmaak",
       type: "string",

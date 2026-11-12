@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useLanguage } from "@/contexts/language-context";
 import { content } from "@/lib/content";
 import { cn } from "@/lib/utils";
@@ -47,6 +48,26 @@ function StatusBadge({ status }: { status: string }) {
       <span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--accent))]" />
       {status}
     </span>
+  );
+}
+
+function WorkTitle({ item, className }: { item: WorkItem; className: string }) {
+  if (!item.href) return <h2 className={className}>{item.title}</h2>;
+  return (
+    <h2 className={className}>
+      <Link
+        href={item.href}
+        className="group/title inline-flex items-baseline gap-3 underline-offset-8 hover:underline"
+      >
+        {item.title}
+        <span
+          aria-hidden
+          className="text-[0.6em] transition-transform group-hover/title:translate-x-1"
+        >
+          →
+        </span>
+      </Link>
+    </h2>
   );
 }
 
@@ -101,9 +122,10 @@ function WorkRow({ item }: { item: WorkItem }) {
                 )}
                 {item.status && <StatusBadge status={item.status} />}
               </div>
-              <h2 className="mt-3 font-[family-name:var(--font-fraunces)] text-4xl text-white md:text-6xl">
-                {item.title}
-              </h2>
+              <WorkTitle
+                item={item}
+                className="mt-3 font-[family-name:var(--font-fraunces)] text-4xl text-white md:text-6xl"
+              />
               <p className="mt-4 max-w-xl text-white/80">{item.body}</p>
             </Reveal>
           </div>
@@ -184,9 +206,10 @@ function WorkRow({ item }: { item: WorkItem }) {
               )}
               {item.status && <StatusBadge status={item.status} />}
             </div>
-            <h2 className="mt-3 font-[family-name:var(--font-fraunces)] text-3xl text-[hsl(var(--ink))] md:text-4xl">
-              {item.title}
-            </h2>
+            <WorkTitle
+              item={item}
+              className="mt-3 font-[family-name:var(--font-fraunces)] text-3xl text-[hsl(var(--ink))] md:text-4xl"
+            />
             <p className="mt-5 text-base leading-relaxed text-[hsl(var(--ink-soft))] md:text-lg">
               {item.body}
             </p>
