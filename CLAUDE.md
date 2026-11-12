@@ -14,11 +14,11 @@ Eagle Boats is een merk van Navisol en heeft een eigen repo (eagle-boats-website
 ## Niet breken
 - URL's blijven exact gelijk (SEO). Nieuwe of hernoemde pagina's: altijd redirect + sitemap bijwerken.
 - Elke pagina bestaat in NL en EN (taalkeuze via `language-context`, inhoud in `src/lib/content.ts`). Wijzig je de ene taal, check de andere.
-- Het contactformulier post naar `/api/contact` (SMTP via `src/lib/mail.ts`). Wijzig je het formulier: test met een echte inzending op de preview.
+- Het contactformulier post naar `/api/contact` (mail via Resend, `src/lib/mail.ts`). Wijzig je het formulier: test met een echte inzending op de preview.
 - Maandelijkse testmail via Vercel Cron (`/api/cron/test-email`, beveiligd met `CRON_SECRET`).
 
 ## Omgevingsvariabelen (Vercel)
-- `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `CONTACT_FROM`, `CONTACT_TO` — contactformulier.
+- `RESEND_API_KEY`, `CONTACT_FROM` (adres op het in Resend geverifieerde domein, bijv. website@navisol.nl), `CONTACT_TO` (optioneel) — contactformulier.
 - `CRON_SECRET`, `TEST_EMAIL_TO` — maandelijkse testmail.
 - `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET` — Sanity.
 
