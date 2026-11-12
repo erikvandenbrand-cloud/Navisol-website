@@ -9,6 +9,19 @@ export async function pageMetadata(slug: string): Promise<Metadata> {
   const meta: Metadata = {};
   if (page?.seoTitle) meta.title = page.seoTitle;
   if (page?.seoDescription) meta.description = page.seoDescription;
+
+  // Eigen canonical en deelgegevens per pagina (de layout geeft anders overal
+  // het adres en de titel van de homepage mee).
+  const path = slug === "home" ? "/" : `/${slug}`;
+  meta.alternates = { canonical: path };
+  meta.openGraph = {
+    title: page?.seoTitle ?? page?.title,
+    description: page?.seoDescription,
+    url: path,
+    siteName: "Navisol",
+    locale: "nl_NL",
+    type: "website",
+  };
   return meta;
 }
 

@@ -5,6 +5,7 @@ import ClientBody from "./ClientBody";
 import Script from "next/script";
 import { LanguageProvider } from "@/contexts/language-context";
 import { SiteChrome } from "@/components/site-chrome";
+import { SITE_URL } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -20,6 +21,7 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Navisol | Aluminium jachtbouw & ontwikkel- en bouwpartner",
   description:
     "Navisol ontwerpt en bouwt aluminium jachten op maat en is de ontwikkel- & bouwpartner voor botenmerken. Alles onder één dak, in Elburg, Nederland.",
@@ -30,7 +32,7 @@ export const metadata: Metadata = {
     title: "Navisol | Aluminium jachtbouw & ontwikkel- en bouwpartner",
     description:
       "Aluminium jachten op maat en ontwikkel- & bouwpartner voor botenmerken. Alles onder één dak.",
-    url: "https://www.navisol.nl",
+    url: SITE_URL,
     siteName: "Navisol",
     locale: "nl_NL",
     type: "website",
