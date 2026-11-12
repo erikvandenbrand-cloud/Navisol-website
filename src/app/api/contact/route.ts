@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
-import { RECIPIENTS, getFrom, getTransporter, escapeHtml } from "@/lib/mail";
+import { RECIPIENTS, isMailConfigured, sendMail, escapeHtml } from "@/lib/mail";
 
-// Nodemailer needs the Node.js runtime (net/tls), not the Edge runtime.
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
@@ -36,11 +35,8 @@ export async function POST(req: Request) {
       );
     }
 
-    const transporter = getTransporter();
-    if (!transporter) {
-      console.error(
-        "SMTP is not configured. Set SMTP_HOST, SMTP_USER and SMTP_PASS.",
-      );
+    if (!isMailConfigured()) {
+      console.error("Mail is not configured. Set RESEND_API_KEY.");
       return NextResponse.json(
         { ok: false, error: "E-mailservice is nog niet geconfigureerd." },
         { status: 500 },
@@ -80,10 +76,9 @@ export async function POST(req: Request) {
       </div>
     `;
 
-    await transporter.sendMail({
-      from: `"Navisol website" <${getFrom()}>`,
+    await sendMail({
       to: RECIPIENTS,
-      replyTo: `"${String(name).replace(/"/g, "")}" <${email}>`,
+      replyTo: `${String(name).replace(/["<>]/g, "")} <${email}>`,
       subject: `Contactformulier — ${subjectLabel} (${name})`,
       text,
       html,

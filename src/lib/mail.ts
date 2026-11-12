@@ -1,5 +1,3 @@
-import nodemailer from "nodemailer";
-
 /** Recipients — override with CONTACT_TO (comma-separated) if needed. */
 export const RECIPIENTS = (
   process.env.CONTACT_TO ??
@@ -9,24 +7,50 @@ export const RECIPIENTS = (
   .map((s) => s.trim())
   .filter(Boolean);
 
-/** The visible "from" address (defaults to the SMTP user). */
+/** Afzender: een adres op een in Resend geverifieerd domein (bijv. website@navisol.nl). */
 export function getFrom() {
-  return process.env.CONTACT_FROM ?? process.env.SMTP_USER ?? "";
+  return process.env.CONTACT_FROM ?? "onboarding@resend.dev";
 }
 
-/** Returns a configured SMTP transporter, or null if the env vars are missing. */
-export function getTransporter() {
-  const host = process.env.SMTP_HOST;
-  const port = Number(process.env.SMTP_PORT ?? 465);
-  const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_PASS;
-  if (!host || !user || !pass) return null;
-  return nodemailer.createTransport({
-    host,
-    port,
-    secure: port === 465, // true for 465 (SSL), false for 587 (STARTTLS)
-    auth: { user, pass },
+/** Is de mailservice (Resend) ingesteld? */
+export function isMailConfigured() {
+  return Boolean(process.env.RESEND_API_KEY);
+}
+
+type MailInput = {
+  to: string | string[];
+  subject: string;
+  text: string;
+  html: string;
+  replyTo?: string;
+};
+
+/**
+ * Verstuurt een mail via de Resend REST API. Gooit een Error met de
+ * foutmelding van Resend als het mislukt, zodat die in de Vercel-logs staat.
+ */
+export async function sendMail({ to, subject, text, html, replyTo }: MailInput) {
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: `Navisol website <${getFrom()}>`,
+      to: Array.isArray(to) ? to : [to],
+      subject,
+      text,
+      html,
+      ...(replyTo ? { reply_to: replyTo } : {}),
+    }),
   });
+
+  if (!res.ok) {
+    const detail = await res.text().catch(() => "");
+    throw new Error(`Resend ${res.status}: ${detail}`);
+  }
+  return res.json() as Promise<{ id: string }>;
 }
 
 /** Basic HTML escaping for user-supplied values. */
